@@ -149,6 +149,10 @@ f8x 基本上不需要任何依赖,或者说它就是为了帮助你安装各种
 - 使用 -swap 选项配置 swap 分区
 - 使用 -update 选项更新 f8x 工具
 
+**8 漏洞扫描服务**
+- 使用 -ks参数一键部署漏洞扫描工具
+- 包括:kscan、fscan、vscan、xray、naabu、nulcei等
+
 ---
 
 ## 实际效果
