@@ -151,7 +151,7 @@ f8x 基本上不需要任何依赖,或者说它就是为了帮助你安装各种
 
 **8 漏洞扫描服务**
 - 使用 -ks参数一键部署漏洞扫描工具
-- 包括:kscan、fscan、vscan、xray、naabu、nulcei等
+- 包括:kscan、fscan、vscan、xray、naabu、nulcei、smap等
 
 ---
 
