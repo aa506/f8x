@@ -35,9 +35,11 @@ Linux_architecture_Name=
 F8x_Version="1.6.1 Dev(Beta1)"
 
 # ===================== Software version variable setting =====================
+fofax_Ver="v0.1.41"
+fofax_Install="fofax_v0.1.41_linux_amd64.tar.gz"
 kscan_Ver="v1.76"
 kscan_Install="kscan_linux_amd64.zip"
-afrog_Ver="v1.3.2"
+afrog_Ver="v1.3.3"
 afrog_Install="afrog_linux_amd64.tar.gz"
 Enscan_Ver="PB-v0.0.3"
 Enscan_Install="ENScanPublic_amd64_linux"
@@ -2313,7 +2315,7 @@ Pentest_Enscan_Install(){
 }
 
 
-# ===================== smap afrog =====================
+# ===================== Install smap  =====================
 Pentest_smap_Install(){
 
     name="smap"
@@ -2331,6 +2333,26 @@ Pentest_smap_Install(){
     fi
 
 }
+
+# ===================== Install fofax =====================
+Pentest_fofax_Install(){
+
+    name="fofax"
+
+    which fofax > /dev/null 2>&1
+
+    if [ $? == 0 ]
+    then
+        Echo_ALERT "$name installed"
+    else
+        cd /tmp && rm -f $fofax_Install > /dev/null 2>&1 && $Porxy_OK wget ${GitPorxy}https://github.com/xiecat/fofax/releases/download/$fofax_Ver/$fofax_Install > /dev/null 2>&1 || Echo_ERROR2
+        tar -zxvf $fofax_Install && cd $fofax_Install > /dev/null 2>&1
+        mv --force fofax /usr/local/bin/fofax && chmod +x /usr/local/bin/fofax
+        fofax -v > /dev/null 2>&1 && Echo_INFOR "Successfully installed $name $fofax_Ver in the /usr/local/bin/" || Echo_ERROR3
+    fi
+
+}
+
 # ===================== Install afrog =====================
 Pentest_afrog_Install(){
 
@@ -7177,6 +7199,8 @@ kali_Tools_TypeS(){
     Pentest_chrome_Install
     echo -e "\033[1;33m\n>> Installing smap\n\033[0m"
     Pentest_smap_Install
+    echo -e "\033[1;33m\n>> Installing fofax\n\033[0m"
+    Pentest_fofax_Install
 
     #Pentest_chrome_Install
     #Pentest_kscan_Install
