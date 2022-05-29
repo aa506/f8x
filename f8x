@@ -45,15 +45,10 @@ Enscan_Ver="PB-v0.0.3"
 Enscan_Install="ENScanPublic_amd64_linux"
 smap_Ver="0.1.11"
 smap_Install="smap_0.1.11_linux_amd64.tar.xz"
-#https://github.com/wgpsec/ENScan_GO/releases/tag/PB-v0.0.3
-#afrog_Install_windows="afrog_windows_amd64.zip"
-#https://github.com/zan8in/afrog/releases/tag/v1.3.2
 naabu="v2.0.7"
 naabu_Install_amd64="naabu_2.0.7_linux_amd64.zip"
-#https://github.com/projectdiscovery/naabu/releases/tag/v2.0.7
 vscan_Ver="v2.0.3"
 vscan_Install="vscan_2.0.3_linux_amd64.zip"
-# https://github.com/veo/vscan/releases/tag/v2.0.3
 hashcat_Version="hashcat-6.2.5"
 jdk_Version="jdk1.8.0_321"
 orclejdk_tmp_ver="1.0.5"
@@ -2827,6 +2822,28 @@ Pentest_gobuster_Install(){
     fi
 
 }
+# ===================== Install fscan_nuclei_out =====================
+Pentest_fscan_nuclei_out_Install(){
+
+    name="fscan_nuclei_out"
+    dir="$P_Dir/fscan_nuclei_out"
+
+    if test -d $dir
+    then
+        Echo_ALERT "$name installed"
+    else
+        cd $P_Dir && $Porxy_OK git clone --depth 1 ${GitPorxy}https://github.com/aa506/fscanOutput.git > /dev/null 2>&1 || Echo_ERROR2
+        cd $dir  > /dev/null 2>&1
+        if test -d $dir
+        then
+            Echo_INFOR "Successfully installed $name in the $dir"
+        else
+            Echo_ERROR3
+        fi
+    fi
+
+}
+
 # ===================== Install crawlergo_x_xray =====================
 Pentest_crawlergo_x_xray_Install(){
 
@@ -7201,7 +7218,8 @@ kali_Tools_TypeS(){
     Pentest_smap_Install
     echo -e "\033[1;33m\n>> Installing fofax\n\033[0m"
     Pentest_fofax_Install
-
+    echo -e "\033[1;33m\n>> Installing fscan_nuclei_out\n\033[0m"
+    Pentest_fscan_nuclei_out_Install
     #Pentest_chrome_Install
     #Pentest_kscan_Install
     # Pentest_vscan_Install
